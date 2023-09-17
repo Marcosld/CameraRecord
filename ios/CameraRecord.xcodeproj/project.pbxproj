@@ -12,6 +12,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		184616502AB7206C00631F9C /* beep-err.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1846164E2AB7206C00631F9C /* beep-err.mp3 */; };
+		184616512AB7206C00631F9C /* beep-err.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1846164E2AB7206C00631F9C /* beep-err.mp3 */; };
+		184616522AB7206C00631F9C /* beep-ok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1846164F2AB7206C00631F9C /* beep-ok.mp3 */; };
+		184616532AB7206C00631F9C /* beep-ok.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1846164F2AB7206C00631F9C /* beep-ok.mp3 */; };
+		184616562AB7279800631F9C /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 184616542AB7279800631F9C /* Ionicons.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-CameraRecord-CameraRecordTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-CameraRecord-CameraRecordTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -36,6 +41,9 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CameraRecord/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CameraRecord/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CameraRecord/main.m; sourceTree = "<group>"; };
+		1846164E2AB7206C00631F9C /* beep-err.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-err.mp3"; sourceTree = "<group>"; };
+		1846164F2AB7206C00631F9C /* beep-ok.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "beep-ok.mp3"; sourceTree = "<group>"; };
+		184616542AB7279800631F9C /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-CameraRecord-CameraRecordTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CameraRecord-CameraRecordTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-CameraRecord.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraRecord.debug.xcconfig"; path = "Target Support Files/Pods-CameraRecord/Pods-CameraRecord.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-CameraRecord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraRecord.release.xcconfig"; path = "Target Support Files/Pods-CameraRecord/Pods-CameraRecord.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +124,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				184616542AB7279800631F9C /* Ionicons.ttf */,
+				1846164E2AB7206C00631F9C /* beep-err.mp3 */,
+				1846164F2AB7206C00631F9C /* beep-ok.mp3 */,
 				13B07FAE1A68108700A75B9A /* CameraRecord */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* CameraRecordTests */,
@@ -235,6 +246,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184616532AB7206C00631F9C /* beep-ok.mp3 in Resources */,
+				184616512AB7206C00631F9C /* beep-err.mp3 in Resources */,
+				184616562AB7279800631F9C /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,8 +256,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184616522AB7206C00631F9C /* beep-ok.mp3 in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				184616502AB7206C00631F9C /* beep-err.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +449,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-CameraRecord-CameraRecordTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = M9N4YQ47LB;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -461,6 +478,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = M9N4YQ47LB;
 				INFOPLIST_FILE = CameraRecordTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
