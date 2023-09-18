@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet} from 'react-native';
-import Icon from 'react-native-ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as React from 'react';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 export const ReverseCameraButton = ({onPress}: Props) => {
   return (
     <Pressable style={styles.button} onPress={onPress}>
-      <Icon name="archive" color="white" size={24} />
+      <Icon name="camera-reverse-outline" color="white" size={24} />
     </Pressable>
   );
 };

@@ -1,50 +1,28 @@
 import * as React from 'react';
 import {Text, StyleSheet} from 'react-native';
-import {beepOk, beepErr} from '../utils/sounds';
 
 type Props = {
-  time: number;
-  beepFor?: number;
-  onComplete: () => void;
+  seconds: number;
+  onTick: (secondsPassed: number) => void;
 };
 
-const playBeep = (timeLeft: number, beepFor: number) => {
-  if (timeLeft <= beepFor) {
-    if (timeLeft === 0) {
-      beepErr.play();
-      return;
-    }
-    beepOk.play();
-  }
-};
-
-export const Countdown = ({time, onComplete, beepFor = time}: Props) => {
-  const [timeLeft, setTimeLeft] = React.useState(time);
+export const Countdown = ({onTick, seconds}: Props) => {
+  const [timePassed, setTimePassed] = React.useState(0);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(val => {
-        const nextTimeLeft = val - 1;
-        if (nextTimeLeft <= 0) {
-          clearInterval(interval);
-        }
-        return nextTimeLeft;
-      });
+      setTimePassed(time => time + 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [time]);
+  }, [setTimePassed]);
 
-  React.useEffect(() => {
-    playBeep(timeLeft, beepFor);
-  }, [timeLeft, beepFor]);
+  React.useLayoutEffect(() => {
+    onTick(timePassed);
+  }, [onTick, timePassed]);
 
-  React.useEffect(() => {
-    if (timeLeft === 0) {
-      onComplete();
-    }
-  }, [timeLeft, onComplete]);
+  const countdown = seconds - timePassed > 0 ? seconds - timePassed : 0;
 
-  return <Text style={styles.counter}>{timeLeft}</Text>;
+  return <Text style={styles.counter}>{countdown}</Text>;
 };
 
 const styles = StyleSheet.create({

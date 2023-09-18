@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {useCameraDevices, Camera} from 'react-native-vision-camera';
-import {StyleSheet, View, Text, Pressable, Alert} from 'react-native';
-import Icon from 'react-native-ionicons';
+import {StyleSheet, View, Text, Alert} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {useIsForeground} from '../hooks/use-is-foreground';
 import {CaptureButton} from '../components/capture-button';
@@ -9,7 +8,7 @@ import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {ReverseCameraButton} from '../components/reverse-camera-button';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../components/stack';
-import {Countdown} from '../components/countdown';
+import {useCountdown} from '../hooks/use-countdown';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Record'>;
 
@@ -23,22 +22,42 @@ export const Record = ({route}: Props) => {
   );
 
   const [isCapturing, setIsCapturing] = React.useState(false);
-  const [isCountingDownToStart, setIsCountingDownToStart] =
-    React.useState(false);
-  const [isCountingDownToEnd, setIsCountingDownToEnd] = React.useState(false);
+  const {
+    countdown,
+    stop: stopCountdown,
+    start: startCountdown,
+  } = useCountdown(route.params.countdown, timePassed => {
+    if (timePassed >= route.params.countdown) {
+      stopCountdown();
+      startWorktime();
+    }
+  });
+  const {
+    countdown: worktimeCountdown,
+    stop: stopWorktime,
+    start: startWorktime,
+  } = useCountdown(
+    route.params.workTime,
+    async timePassed => {
+      if (timePassed > route.params.workTime) {
+        await stopCapturing();
+      }
+    },
+    3,
+  );
 
   const device = devices[selectedDevice];
 
-  const stopRecording = async () => {
+  const stopCapturing = async () => {
     await camera.current?.stopRecording();
     setIsCapturing(false);
-    setIsCountingDownToStart(false);
-    setIsCountingDownToEnd(false);
+    stopWorktime();
+    stopCountdown();
   };
 
-  const onRecordHandler = async () => {
+  const onStartCapturingHandler = async () => {
     if (isCapturing) {
-      await stopRecording();
+      await stopCapturing();
       return;
     }
     camera.current?.startRecording({
@@ -53,8 +72,8 @@ export const Record = ({route}: Props) => {
         Alert.alert('Error recording video');
       },
     });
-    setIsCapturing(val => !val);
-    setIsCountingDownToStart(true);
+    setIsCapturing(true);
+    startCountdown();
   };
 
   if (device == null) {
@@ -79,25 +98,12 @@ export const Record = ({route}: Props) => {
           setSelectedDevice(val => (val === 'back' ? 'front' : 'back'));
         }}
       />
-      <CaptureButton isCapturing={isCapturing} onPress={onRecordHandler} />
-      {isCountingDownToStart && (
-        <Countdown
-          time={route.params.countdown}
-          onComplete={() => {
-            setIsCountingDownToStart(false);
-            setIsCountingDownToEnd(true);
-          }}
-        />
-      )}
-      {isCountingDownToEnd && (
-        <Countdown
-          beepFor={3}
-          time={route.params.workTime}
-          onComplete={async () => {
-            await stopRecording();
-          }}
-        />
-      )}
+      <CaptureButton
+        isCapturing={isCapturing}
+        onPress={onStartCapturingHandler}
+      />
+      {countdown}
+      {worktimeCountdown}
     </View>
   );
 };
